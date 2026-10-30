@@ -25,8 +25,8 @@ public class Movimiento {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String ubicacion = (sucursal != null) ? " en sucursal " + sucursal.getNombre() : "";
-        return "Fecha: " + fecha.format(formatter) + " - Estado del envío: " + estado + ubicacion;
+        String lugar = (sucursal != null) ? " en sucursal " + sucursal.getNombre() : "";
+        return "Fecha: " + fecha.format(formatter) + " - Estado del envío: " + estado.getDescripcion() + lugar;
     }
     
 }

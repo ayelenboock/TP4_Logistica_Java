@@ -1,6 +1,6 @@
 public class EnvioInternacional extends Envio{
-    public EnvioInternacional( Cliente cliente){
-        super(cliente);
+    public EnvioInternacional( Cliente cliente, int codigoSeguimiento){
+        super(cliente,codigoSeguimiento);
     }
     @Override
     public double calcularCostoEnvio(){

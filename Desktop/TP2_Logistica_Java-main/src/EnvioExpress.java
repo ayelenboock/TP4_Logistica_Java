@@ -1,6 +1,6 @@
 public class EnvioExpress extends Envio{
-    public EnvioExpress(Cliente cliente){
-        super(cliente);
+    public EnvioExpress(Cliente cliente, int codigoSeguimiento){
+        super(cliente, codigoSeguimiento);
     }
     @Override
     public double calcularCostoEnvio(){

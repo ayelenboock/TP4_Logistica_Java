@@ -15,32 +15,48 @@ public class Paquete {
         this.destino=destino;
         this.estado=Estado.RECIBIDO;  // estado por defecto
     }
-    //el paquete cumpla con la regla del don´t ask
-   
-    public void iniciarPreparacion() {
-    if (!this.estado.equals(Estado.RECIBIDO)) {
-        throw new IllegalStateException("Lo siento, No existe el paquete "); 
+    private boolean estaRecibido() {
+        return this.estado == Estado.RECIBIDO;
     }
-    this.estado = Estado.EN_PREPARACION;
+    private boolean estaEnPreparacion() {
+        return this.estado == Estado.EN_PREPARACION;
+    }
+
+    private boolean estaEnReparto() {
+        return this.estado == Estado.EN_REPARTO;
+    }
+
+    public void iniciarPreparacion() {
+        if (!estaRecibido()) {
+            throw new IllegalStateException("El paquete " + numGuia + " ya fue preparado, no se puede preparar de nuevo.");
+        }
+        this.estado = Estado.EN_PREPARACION;
     }
 
     public void salirAReparto() {
-         if (!this.estado.equals(Estado.EN_PREPARACION)) {
-         throw new IllegalStateException("El paquete no está preparado para salir."); 
+        if (!estaEnPreparacion()) {
+            throw new IllegalStateException("El paquete " + numGuia + " todavÃ­a no estÃ¡ preparado para salir.");
+        }
+        this.estado = Estado.EN_REPARTO;
     }
-     this.estado = Estado.EN_REPARTO;
+    public void recibir() {
+        if (estaEnReparto()) {
+            this.estado = Estado.EN_PREPARACION;
+        } else if (!estaEnPreparacion()) {
+            throw new IllegalStateException("El paquete " + numGuia + " no puede recibirse en una sucursal (estado actual: "
+                    + estado.getDescripcion() + ").");
+        }
+    }
+    public void registrarEntrega() {
+        if (!estaEnReparto()) {
+            throw new IllegalStateException("El paquete " + numGuia + " no se puede entregar porque todavÃ­a no saliÃ³ a reparto.");
+        }
+        this.estado = Estado.ENTREGADO;
     }
 
-    public void registrarEntrega() {
-        if (!this.estado.equals(Estado.EN_REPARTO)) {
-         throw new IllegalStateException("No se puede entregar un paquete que no fue despachado."); 
-    }
-     this.estado = Estado.ENTREGADO;
-   }
     public double getPeso() {
         return this.peso;
-    }
-
+    }  
     public String getDestino() {
         return this.destino;
     }

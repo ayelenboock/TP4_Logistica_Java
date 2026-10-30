@@ -3,18 +3,30 @@ import java.util.ArrayList;
 public class Cliente {
     private String nombre;
     private String apellido;
-    private String dni;
+    private int dni;
     private ArrayList<Envio> MisEnvios;
     // constructor para crear e inicializar datos del cliente
-    public Cliente(String nombre,String apellido,String dni ){
+    public Cliente(String nombre,String apellido,int dni ){
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
-        this.MisEnvios=new ArrayList<>();
+        this.misEnvios=new ArrayList<>();
     }
     //metodo para agregar nuevo envio a la lista de cliente
     public void registrarNuevoEnvioCliente(Envio envio){
-        this.MisEnvios.add(envio);
+        this.misEnvios.add(envio);
     }
-    
+    public int getDni(){
+        return this.dni;
+    }
+    public String getNombre(){
+        return this.nombre;
+    }
+    public String getApellido(){
+        return this.apellido;
+    }
+    @Override
+    public String toString(){
+        return nombre + " " + apellido + " DNI: "+ dni +" ";
+    }
 }
